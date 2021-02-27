@@ -54,7 +54,7 @@ const ShowRoom = (tab) => {
         })}
       </div>
 
-      {infoId >= 0 ? <InfoPanel data={data.filter((show) => {return show.id == infoId;})}/> : <></>}
+      {infoId >= 0 ? <InfoPanel id={infoId}/> : <></>}
 
     </>
   )
