@@ -5,12 +5,21 @@ const NavBar = (tab) => {
 
 	return (
 		<div className="navBarContainer">
-	    <ul className="navBar">
-	      <li onClick={() => tab.navChangeEvent("Home")}><NavTab name={"Home"} current={tab.current}/></li>
-	      <li onClick={() => tab.navChangeEvent("Upcoming")}><NavTab name={"Upcoming"} current={tab.current}/></li>
-	      <li onClick={() => tab.navChangeEvent("Popular")}><NavTab name={"Popular"} current={tab.current}/></li>
-	      <li onClick={() => tab.navChangeEvent("Search")}><NavTab name={"Search"} current={tab.current}/></li>
-	    </ul>
+			<div className="logoContainer">
+				Movie Star Logo
+			</div>
+	    <div className="navBar">
+				<ul>
+		      <li onClick={() => tab.navChangeEvent("Movie")}><NavTab name={"Movie"} current={tab.current}/></li>
+		      <li onClick={() => tab.navChangeEvent("TV Show")}><NavTab name={"TV Show"} current={tab.current}/></li>
+		    </ul>
+			</div>
+			<div className="searchBar">
+				Search Bar
+			</div>
+			<div className="login">
+				LogIn
+			</div>
 		</div>
 	)
 }
