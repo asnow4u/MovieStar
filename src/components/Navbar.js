@@ -1,5 +1,6 @@
 import React from 'react';
 import NavTab from './NavTab';
+import Search from './Search';
 
 const NavBar = (tab) => {
 
@@ -15,10 +16,7 @@ const NavBar = (tab) => {
 		    </ul>
 			</div>
 			<div className="searchBar">
-				Search Bar
-			</div>
-			<div className="login">
-				LogIn
+				<Search changeSearchQuery={tab.changeSearchQuery}/>
 			</div>
 		</div>
 	)

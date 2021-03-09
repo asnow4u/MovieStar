@@ -36,10 +36,12 @@ const InfoPanel = (show) => {
   console.log(showDetails);
 
   if (showDetails){
-    if (show.media === "Movie"){
-      return (
-        <div>
+    return (
+      <div className="infoPanelBackGround" onClick={() => show.toggleDetailMenu(-1)}>
+        <div className="infoPanelPoster">
           <img src={'https://image.tmdb.org/t/p/w300_and_h450_bestv2' + showDetails.poster_path}/>
+        </div>
+        <div className="infoPanelData">
           <h3>{showDetails.title}</h3>
           { showDetails.homepage ? <div onClick={() => {
             window.open(showDetails.homepage, '_blank');
@@ -48,29 +50,19 @@ const InfoPanel = (show) => {
               return (<p key={genres.id}>{genres.name}</p>);
           })}
           <p>{showDetails.overview}</p>
-          <p>Release Date: {showDetails.release_date}</p>
-          <p>Length: {showDetails.runtime} minutes</p>
-          <p>Revenue: ${showDetails.revenue.toLocaleString()}</p>
-          <p>Review Score: {showDetails.vote_average}</p>
-        </div>
-      )
 
-    } else if (show.media === "TV Show"){
-      return (
-        <div>
-          <img src={'https://image.tmdb.org/t/p/w300_and_h450_bestv2' + showDetails.poster_path}/>
-          <h3>{showDetails.title}</h3>
-          { showDetails.homepage ? <div onClick={() => {
-            window.open(showDetails.homepage, '_blank');
-          }}>Website</div> : <></>}
-          {showDetails.genres.map((genres) => {
-              return (<p key={genres.id}>{genres.name}</p>);
-          })}
-          <p>{showDetails.overview}</p>
+          { show.media==="Movie" ?
+              <>
+                <p>Release Date: {showDetails.release_date}</p>
+                <p>Length: {showDetails.runtime} minutes</p>
+                <p>Revenue: ${showDetails.revenue.toLocaleString()}</p>
+              </> : <></> }
+
           <p>Review Score: {showDetails.vote_average}</p>
         </div>
-      )
-    }
+      </div>
+    );
+
   }
 
   return (<></>);

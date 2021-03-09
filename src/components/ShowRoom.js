@@ -1,5 +1,7 @@
 import React from 'react';
 import ShowSlider from './ShowSlider.js';
+import ShowCarousel from './ShowCarousel.js';
+import SearchContainer from './SearchContainer.js';
 import InfoPanel from './InfoPanel.js';
 
 
@@ -9,14 +11,14 @@ const ShowRoom = (tab) => {
   const [popular, setPopular] = React.useState([]);
   const [topRated, setTopRated] = React.useState([]);
   const [upcoming, setUpcoming] = React.useState([]);
+  const [searchQuery, setSearchQuery] = React.useState([]);
 
   const [selectedId, setSelectedId] = React.useState(-1);
 
   React.useEffect(() => {
+
     const fetchData = async (media, category) => {
-
       try {
-
         const res = await fetch('https://api.themoviedb.org/3/' + media + '/' + category + '?api_key=b369da1370460aa195101abae0307148');
 
         if (!res.ok) {
@@ -42,20 +44,43 @@ const ShowRoom = (tab) => {
       }
     }
 
+    const fetchSearchData = async (category) => {
+      try {
+        const res = await fetch('https://api.themoviedb.org/3/search/' + category + '?api_key=b369da1370460aa195101abae0307148&query=' + tab.query);
+
+        if (!res.ok){
+          throw Error(res.statusText);
+        }
+
+        const json = await res.json();
+        setSearchQuery(json.results);
+
+      } catch (error){
+        console.log(error);
+      }
+    }
+
 
     if (tab.current === "Movie") {
-      fetchData("movie", "now_playing");
-      fetchData("movie", "popular");
-      fetchData("movie", "top_rated");
-      fetchData("movie", "upcoming");
-
+      if (tab.query !== '') {
+        fetchSearchData("movie");
+      } else {
+        fetchData("movie", "now_playing", false);
+        fetchData("movie", "popular", false);
+        fetchData("movie", "top_rated", false);
+        fetchData("movie", "upcoming", false);
+      }
     } else if (tab.current === "TV Show"){
-      fetchData("tv", "airing_today");
-      fetchData("tv", "popular");
-      fetchData("tv", "top_rated");
-      fetchData("tv", "on_the_air");
+      if (tab.query !== '') {
+        fetchSearchData("tv");
+      } else {
+        fetchData("tv", "airing_today");
+        fetchData("tv", "popular");
+        fetchData("tv", "top_rated");
+        fetchData("tv", "on_the_air");
+      }
     } else {
-      console.err("Navigation tab not found");
+      console.error("Navigation tab not found");
     }
 
   }, [tab]);
@@ -65,19 +90,37 @@ const ShowRoom = (tab) => {
     setSelectedId(id);
   }
 
+  if (tab.query !== '') {
+    return (
+      <>
+        <div className="showRoomContainer">
+          <h1>Searching: {tab.query}</h1>
+          <SearchContainer data={searchQuery} toggleDetailMenu={toggleDetailMenu} />
+        </div>
+      </>
+    )
 
-  return (
-    <>
-      <div className="showRoomContainer">
-        <ShowSlider media={tab.current} data={nowPlaying} category={"Now Playing"} toggleDetailMenu={toggleDetailMenu}/>
-        <ShowSlider media={tab.current} data={upcoming} category={"Upcoming"} toggleDetailMenu={toggleDetailMenu}/>
-        <ShowSlider media={tab.current} data={popular} category={"Popular"} toggleDetailMenu={toggleDetailMenu}/>
-        <ShowSlider media={tab.current} data={topRated} category={"Top Rated"} toggleDetailMenu={toggleDetailMenu}/>
-      </div>
+  } else {
 
-      {selectedId >= 0 ? <InfoPanel id={selectedId} media={tab.current}/> : <></>}
-    </>
-  )
+    return (
+      <>
+        <div className="showCarouselContainer">
+          <ShowCarousel data={popular}/>
+          {
+            //<ShowSlider media={tab.current} data={popular} category={"Popular"} toggleDetailMenu={toggleDetailMenu}/>
+          }
+        </div>
+
+        <div className="showRoomContainer">
+          <ShowSlider media={tab.current} data={nowPlaying} category={"Now Playing"} toggleDetailMenu={toggleDetailMenu}/>
+          <ShowSlider media={tab.current} data={upcoming} category={"Upcoming"} toggleDetailMenu={toggleDetailMenu}/>
+          <ShowSlider media={tab.current} data={topRated} category={"Top Rated"} toggleDetailMenu={toggleDetailMenu}/>
+        </div>
+
+        {selectedId >= 0 ? <InfoPanel id={selectedId} media={tab.current} toggleDetailMenu={toggleDetailMenu}/> : <></>}
+      </>
+    )
+  }
 }
 
 export default ShowRoom;
