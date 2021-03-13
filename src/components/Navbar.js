@@ -7,7 +7,7 @@ const NavBar = (tab) => {
 	return (
 		<div className="navBarContainer">
 			<div className="logoContainer">
-				Movie Star Logo
+				<img className="logoImage" src="logo.png" />
 			</div>
 	    <div className="navBar">
 				<ul>

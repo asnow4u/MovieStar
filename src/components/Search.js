@@ -2,13 +2,19 @@ import React from 'react';
 
 const Search = (tab) => {
 
+  const clearForm = () => {
+    document.getElementById('myInput').value = '';
+    tab.changeSearchQuery('');
+  }
+
   return (
-    <form onSubmit={(e) => {
+    <form className="searchForm" onSubmit={(e) => {
       e.preventDefault();
 
     }}>
-     <input type='text' onChange={(e) => {tab.changeSearchQuery(e.target.value)}}/>
-     <button type="submit">Search</button>
+     <input className="searchFormInput" id="myInput" type='text' onChange={(e) => {tab.changeSearchQuery(e.target.value)}}/>
+     <button onClick={() => clearForm()} className="searchClearForm" type="submit">Clear</button>
+
     </form>
   )
 }
