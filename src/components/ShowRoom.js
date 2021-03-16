@@ -92,33 +92,41 @@ const ShowRoom = (tab) => {
 
   if (tab.query !== '') {
     return (
-      <>
+      <div className="showContainer">
         <div className="showRoomContainer">
-          <h1>Searching: {tab.query}</h1>
+          <h1 className="searchTitle">Searching: {tab.query}</h1>
           <SearchContainer data={searchQuery} toggleDetailMenu={toggleDetailMenu} />
         </div>
-      </>
+
+        <div className="footer">
+          Check out my portfolio XD
+        </div>
+      </div>
     )
 
   } else {
 
     return (
-      <>
+      <div className="showContainer">
         <div className="showCarouselContainer">
-          <ShowCarousel data={popular}/>
-          {
-            //<ShowSlider media={tab.current} data={popular} category={"Popular"} toggleDetailMenu={toggleDetailMenu}/>
-          }
+          <ShowCarousel data={popular} toggleDetailMenu={toggleDetailMenu}/>
         </div>
 
         <div className="showRoomContainer">
           <ShowSlider media={tab.current} data={nowPlaying} category={"Now Playing"} toggleDetailMenu={toggleDetailMenu}/>
-          <ShowSlider media={tab.current} data={upcoming} category={"Upcoming"} toggleDetailMenu={toggleDetailMenu}/>
-          <ShowSlider media={tab.current} data={topRated} category={"Top Rated"} toggleDetailMenu={toggleDetailMenu}/>
+          <ShowSlider media={tab.current} data={upcoming} category={"Coming Soon"} toggleDetailMenu={toggleDetailMenu}/>
+          <ShowSlider media={tab.current} data={topRated} category={"The Best Of The Best"} toggleDetailMenu={toggleDetailMenu}/>
         </div>
 
         {selectedId >= 0 ? <InfoPanel id={selectedId} media={tab.current} toggleDetailMenu={toggleDetailMenu}/> : <></>}
-      </>
+
+
+        <div className="footer">
+          <h1>Powered By: </h1>
+          <img className="footerImage" src="movieDB.svg" alt=""/>
+        </div>
+
+      </div>
     )
   }
 }

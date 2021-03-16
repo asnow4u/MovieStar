@@ -4,8 +4,6 @@ const InfoPanel = (show) => {
 
   const [showDetails, setShowDetails] = React.useState('');
 
-  // console.log(show.data[0]);
-
   React.useEffect(() => {
     const getDetails = async (media) => {
       try {
@@ -18,7 +16,6 @@ const InfoPanel = (show) => {
         }
 
         setShowDetails(await res.json());
-
 
       } catch (e) {
         console.log(e);
@@ -39,26 +36,45 @@ const InfoPanel = (show) => {
     return (
       <div className="infoPanelBackGround" onClick={() => show.toggleDetailMenu(-1)}>
         <div className="infoPanelPoster">
-          <img src={'https://image.tmdb.org/t/p/w300_and_h450_bestv2' + showDetails.poster_path}/>
+          <img className="infoPanelPosterImage" src={'https://image.tmdb.org/t/p/w300_and_h450_bestv2' + showDetails.poster_path}/>
         </div>
         <div className="infoPanelData">
-          <h3>{showDetails.title}</h3>
-          { showDetails.homepage ? <div onClick={() => {
-            window.open(showDetails.homepage, '_blank');
-          }}>Website</div> : <></>}
+          <h1 className="infoPanelTitle"> { show.media === "Movie" ? showDetails.title : showDetails.name}</h1>
+
+          <ul className="infoPanelGenreList">
           {showDetails.genres.map((genres) => {
-              return (<p key={genres.id}>{genres.name}</p>);
+              return (<li key={genres.id} className="infoPanelGenreListElement">--{genres.name}--</li>);
           })}
-          <p>{showDetails.overview}</p>
+          </ul>
 
-          { show.media==="Movie" ?
-              <>
-                <p>Release Date: {showDetails.release_date}</p>
-                <p>Length: {showDetails.runtime} minutes</p>
-                <p>Revenue: ${showDetails.revenue.toLocaleString()}</p>
-              </> : <></> }
+          <div className="infoPanelSection">
+            <div className="infoPanelDisc">
+              <p>{showDetails.overview}</p>
 
-          <p>Review Score: {showDetails.vote_average}</p>
+
+            </div>
+
+            <div className="infoPanelDetails">
+
+              {show.media==="Movie" ?
+                <ul className="infoPanelDetailList">
+                  <li className="infoPanelDetailListElements">Release Date: {showDetails.release_date}</li>
+                  <li className="infoPanelDetailListElements">Length: {showDetails.runtime} minutes</li>
+                  <li className="infoPanelDetailListElements">Revenue: ${showDetails.revenue.toLocaleString()}</li>
+                </ul>
+              : <ul className="infoPanelDetailList">
+                  <li className="infoPanelDetailListElements">Release Date: {showDetails.first_air_date}</li>
+                  <li className="infoPanelDetailListElements">Seasons: {showDetails.number_of_seasons}</li>
+                  <li className="infoPanelDetailListElements">Episodes: {showDetails.number_of_episodes}</li>
+                </ul>}
+            </div>
+          </div>
+
+          <div className="infoPanelReview">
+              <img className="infoPanelReviewStar" src="star.png"/>
+              <p className="infoPanelReviewScore">{showDetails.vote_average}</p>
+          </div>
+
         </div>
       </div>
     );

@@ -9,6 +9,8 @@
   width: 100%;
   height: 80px;
   background-color: red;
+  border-bottom: 2px solid black;
+  /* background-image: linear-gradient(180deg, red, yellow); */
 }
 
 .logoContainer {
@@ -47,7 +49,8 @@ li {
   text-align: center;
   font-size: 25px;
   font-weight: bold;
-  padding-top: 5px;
+  padding-top: 10px;
+  cursor: pointer;
 }
 
 .searchBar {
@@ -59,39 +62,55 @@ li {
 
 .searchFormInput {
   width: 60%;
-  padding-left: 10px;
+  padding-left: 30px;
   color: yellow;
   font-size: 30px;
   border: none;
   border-bottom: 2px solid yellow;
   background-color: red;
   outline: none;
-
-  /* background search picture */
-  /* background-image: url('searchicon.png'); */
-  /* background-position: 10px 10px;  */
-  /* background-repeat: no-repeat; */
+  background-image: url('https://cdn2.iconfinder.com/data/icons/font-awesome/1792/search-20.png');
+  background-position: left center;
+  background-repeat: no-repeat;
 }
 
+.showContainer {
+  box-shadow: 10px 0px 50px 10px yellow inset, -10px 0px 50px 10px yellow inset;
+}
 
 .showRoomContainer {
-  margin: 40px 70px;
+  /* margin: 70px 70px 70px 50px; */
+  padding-top: 70px;
+  margin-left: 70px;
+  margin-right: 70px;
+  margin-bottom: 50px;
 }
 
 .showSliderTitle {
   text-align: center;
   font-size: 60px;
+  color: yellow;
+  background-image: linear-gradient(90deg, white, red, white);
 }
 
 .showSliderContainer {
   display: flex;
   overflow-x: scroll;
-  margin-bottom: 50px;
+  margin-bottom: 70px;
 }
 
 .searchResultsContainer {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+}
+
+.searchTitle {
+  font-size: 60px;
+  margin-bottom: 30px;
+  text-align: center;
+  color: yellow;
+  background-image: linear-gradient(90deg, white, red, white);
 }
 
 .showTileTitle {
@@ -101,33 +120,132 @@ li {
 
 .showTileContainer {
   width: 300px;
+  cursor: pointer;
+}
+
+.showTileContainer:hover {
+  box-shadow: 0px -5px red inset;
 }
 
 .infoPanelBackGround {
-  position: absolute;
+  position: fixed;
   display: flex;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 5;
-  background-color: gray;
+  background-color: white;
 }
 
 .infoPanelPoster {
-  margin: 30px 50px;
+  display: flex;
+  height: 100%;
+  border-right: 5px solid black;
+}
+
+.infoPanelPosterImage {
+  width: 500px;
 }
 
 .infoPanelData {
-  margin-top: 100px;
+  padding-top: 80px;
+  padding-left: 60px;
+  padding-right: 60px;
+  box-shadow: 10px 0px 40px 10px yellow inset, -10px 0px 40px 10px yellow inset;
+}
+
+.infoPanelTitle {
+  text-align: center;
+  font-size: 60px;
+  color: yellow;
+  background-image: linear-gradient(90deg, white, red, white);
+}
+
+.infoPanelGenreList {
+  width: 90%;
+  padding-top: 10px;
+  text-align: center;
+}
+
+.infoPanelGenreListElement {
+  display: inline-block;
+  width: 150px;
+  float: none;
+  font-weight: bold;
+}
+
+.infoPanelSection {
+  display: flex;
+  margin-top: 70px;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.infoPanelDisc {
+  width: 60%;
+  padding-top: 25px;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-bottom: 10px;
+  font-size: 20px;
+  border: 2px solid black;
+}
+
+.infoPanelDetails {
+  width: 40%;
+  padding-left: 30px;
+}
+
+.infoPanelDetailList {
+  list-style-type: disc;
+  width: 80%;
+  padding-top: 0px;
+}
+
+.infoPanelDetailListElements {
+  float: none;
+  width: 100%;
+  font-size: 20px;
+}
+
+.infoPanelReview {
+  position: absolute;
+  top: 155px;
+  left: 600px;
+}
+
+.infoPanelReviewStar {
+  width: 200px;
+}
+
+.infoPanelReviewScore {
+  position: relative;
+  font-size: 30px;
+  font-weight: bold;
+  top: -130px;
+  left: 77px;
+  transform: rotate(-20deg);
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.footerImage {
+  padding-left: 10px;
+  width: 400px;
 }
 
 .showCarouselContainer {
   display: flex;
-  height: 500px;
+  height: 600px;
   width: 70%;
   align-items: center;
-  margin-top: 30px;
+  padding-top: 50px;
   margin-left: auto;
   margin-right: auto;
   overflow: hidden;
@@ -139,6 +257,7 @@ li {
   width: 160px;
   opacity: 0.4;
   z-index: 1;
+  cursor: pointer;
 }
 
 .rightShow {
@@ -147,6 +266,7 @@ li {
   width: 220px;
   opacity: 0.7;
   z-index: 2;
+  cursor: pointer;
 }
 
 .centerShow {
@@ -155,6 +275,7 @@ li {
   width: 300px;
   opacity: 1;
   z-index: 3;
+  cursor: pointer;
 }
 
 .leftShow {
@@ -163,6 +284,7 @@ li {
   width: 220px;
   opacity: 0.7;
   z-index: 2;
+  cursor: pointer;
 }
 
 .farLeftShow {
@@ -171,6 +293,7 @@ li {
   width: 160px;
   opacity: 0.4;
   z-index: 1;
+  cursor: pointer;
 }
 
 .outsideCarouselView {
