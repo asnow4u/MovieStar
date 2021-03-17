@@ -1,4 +1,6 @@
 {
+  "name": "movieStar",
+  "homepage": "https://asnow4u.github.io/MovieStar",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
